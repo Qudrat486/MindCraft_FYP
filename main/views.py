@@ -88,4 +88,5 @@ def login_view(request):
 
 
 
-
+def update_profile(request):
+    return render(request,'registration/update_profile.html')

@@ -1,5 +1,6 @@
 from django.urls import path, include
 from . import views
+from django.contrib.auth import views as auth_views
 # main/urls.py
 # from main import views, user_login
 
@@ -19,4 +20,6 @@ urlpatterns = [
     path('enrolled-courses/', views.enrolled_courses, name='enrolled_courses'),
     path('logout/', views.logout_view, name='logout'),
     path('login/', views.login_view, name='login'),
+    
+    path('accounts/update_profile',views.update_profile, name='update_profile')
 ]
