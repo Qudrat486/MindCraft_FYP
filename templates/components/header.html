@@ -197,12 +197,13 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <span>Welcome {{ user.username }}</span>
+            <!-- <span>Welcome {{ user.username }}</span> -->
+            <span>Welcome {{ user.first_name }} {{ user.last_name }}</span>
             <!-- Display username -->
           </a>
           <ul class="dropdown-menu" aria-labelledby="userDropdown">
             <li>
-              <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+              <a class="dropdown-item" href="{% url 'update_profile' %}">Profile</a>
             </li>
             <!-- Profile link -->
             <li>
@@ -212,7 +213,14 @@
             </li>
             <!-- Enrolled courses link -->
             <li>
-              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+              <!-- <a class="dropdown-item" href="{% url 'logout' %}">Logout</a> -->
+              <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer;">
+                    Logout
+                </button>
+            </form>
+            
             </li>
             <!-- Logout link -->
           </ul>

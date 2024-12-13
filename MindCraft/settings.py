@@ -134,10 +134,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
+# STATIC_ROOT = BASE_DIR / "static"
 
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static')
+# ]
+
+# Path for collected static files (used in production)
+STATIC_ROOT = BASE_DIR / "staticfiles"  
+
+# Additional directories with static files (used during development)
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    BASE_DIR / "static",  # This is where your development static files are located
 ]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -157,4 +168,8 @@ EMAIL_HOST_PASSWORD='ujfm vhgo ziuf jktl'
 
 
 DEFAULT_FROM_EMAIL = 'qullah486@gmail.com'
+
+
+LOGOUT_REDIRECT_URL = '/'
+
 

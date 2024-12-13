@@ -16,17 +16,21 @@
     />
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.png" />
+    <!-- <link rel="shortcut icon" href="favicon.png" /> -->
+    <link rel="icon" href="{% static 'favicon.png' %}">
+
 
     <!-- Font -->
-    <link
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- <link
       href="../../../fonts.googleapis.com/css2a324.css?family=Jost:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
     <link
       href="../../../fonts.googleapis.com/css2428a.css?family=Fredoka+One&amp;family=Lora:wght@400;700&amp;family=Montserrat:wght@400;500;600;700&amp;family=Nunito:wght@400;700&amp;display=swap"
       rel="stylesheet"
-    />
+    /> -->
 
     <!-- Libs CSS -->
     <link rel="stylesheet" href="{% static 'assets/fonts/fontawesome/fontawesome.css' %}" />
@@ -46,10 +50,12 @@
     <link rel="stylesheet" href="{% static 'assets/libs/quill/dist/quill.core.css' %}" />
 
     <!-- Map -->
-    <link
+    <!-- <link
       href="../../../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css"
       rel="stylesheet"
-    />
+    /> -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
+
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/theme.min.css' %}" />
@@ -95,7 +101,8 @@
     <script src="{% static 'assets/libs/typed.js/lib/typed.min.js' %}"></script>
 
     <!-- Map -->
-    <script src="../../../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script>
+    <!-- <script src="../../../api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script> -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
 
     <!-- Theme JS -->
     <script src="{% static 'assets/js/theme.min.js' %}"></script>
