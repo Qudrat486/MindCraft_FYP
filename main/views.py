@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from main.models import Categories
 
 
 
@@ -12,7 +13,12 @@ def base(request):
     return render(request, 'base.html')
 
 def home(request):
-    return render(request, 'main/home.html')
+    category = Categories.objects.all().order_by('id')[0:5]
+    context= {
+        'category' : category
+        
+    }
+    return render(request, 'main/home.html', context)
 
 def single_course(request):
     return render(request, 'main/single_course.html')
