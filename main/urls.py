@@ -2,6 +2,9 @@ from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
+
 # main/urls.py
 # from main import views, user_login
 
@@ -25,4 +28,4 @@ urlpatterns = [
     
     path('accounts/update_profile',views.update_profile, name='update_profile'), #profile
     path('accounts/update_profile/updated_profile',views.updated_profile, name='updated_profile'),   #update_profile
-]
+]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

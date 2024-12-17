@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from main.models import Categories
+from main.models import Categories, Course
 
 
 
@@ -14,8 +14,12 @@ def base(request):
 
 def home(request):
     category = Categories.objects.all().order_by('id')[0:5]
+    course = Course.objects.filter(status= 'PUBLISH').order_by('-id')
+    
+    
     context= {
-        'category' : category
+        'category' : category,
+        'course' : course,
         
     }
     return render(request, 'main/home.html', context)
