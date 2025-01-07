@@ -1,4 +1,8 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load course_tags %}
+
 <!-- HERO
     ================================================== -->
 <section
@@ -74,6 +78,7 @@
     </svg>
   </div>
 </section>
+<!-- //////////// -->
 
 <!-- FEATURED PRODUCT
     ================================================== -->
@@ -104,19 +109,19 @@
           >
             All Categories
           </a>
-          {% for i in category %}
+        {% for category in categories %}
           <a
             class="btn-sm btn-pill me-1 mb-1 text-dark fw-medium px-6"
-            id="pills-art-tab"
+            id="pills-{{ category.id }}-tab"
             data-bs-toggle="tab"
-            href="#pills-art-tab"
+            href="#pills-{{ category.id }}"
             role="tab"
-            aria-controls="pills-art"
+            aria-controls="pills-{{ category.id }}"
             aria-selected="false"
           >
-            {{i.name}}
+            {{ category.name }}
           </a>
-          {% endfor %}
+        {% endfor %}
         </div>
       </div>
     </div>
@@ -133,7 +138,7 @@
           class="mx-n4 flickity-button-outset"
           data-flickity='{"pageDots": true, "prevNextButtons": true, "cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'
         >
-          {% for i in course %}
+        {% for course in courses %}
           <div
             class="col-12 col-md-6 col-xl-4 col-wd-3 pb-4 pb-md-7"
             style="padding-right: 15px; padding-left: 15px"
@@ -189,7 +194,7 @@
                 >
                   <img
                     class="rounded shadow-light-lg"
-                    src="{{i.featured_image}}"
+                    src="{{course.featured_image}}"
                     alt="..."
                   />
                 </a>
@@ -198,7 +203,7 @@
                   class="badge sk-fade-bottom badge-lg badge-orange badge-pill badge-float bottom-0 left-0 mb-4 ms-4"
                 >
                   <span class="text-white text-uppercase fw-bold font-size-xs"
-                    >Discount {{i.discount}} %</span
+                    >Discount {{course.discount}} %</span
                   >
                 </span>
               </div>
@@ -210,7 +215,7 @@
                     class="avatar avatar-xl badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg"
                   >
                     <img
-                      src="{{i.author.author_profile}}"
+                      src="{{course.author.author_profile}}"
                       alt="..."
                       class="avatar-img rounded-circle"
                     />
@@ -220,7 +225,7 @@
                 <!-- Preheading -->
                 <a href="course-single-v5.html"
                   ><span class="mb-1 d-inline-block text-gray-800"
-                    >{{i.category}}</span
+                    >{{course.category}}</span
                   ></a
                 >
 
@@ -233,7 +238,7 @@
                     <h4
                       class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2"
                     >
-                      {{i.title}}
+                      {{course.title}}
                     </h4>
                   </a>
 
@@ -297,32 +302,34 @@
                     </div>
 
                     <div class="col-auto px-2 text-right">
-                      <del class="font-size-sm">$959</del>
-                      <ins class="h4 mb-0 d-block mb-lg-n1">{{i.price}}</ins>
+                      <del class="font-size-sm">${{course.price}}</del>
+                      <ins class="h4 mb-0 d-block mb-lg-n1"
+                        >${% discount_calculation course.price course.discount %}</ins
+                      >
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {% endfor %}
+        {% endfor %}
         </div>
       </div>
 
-      {% for cat in category %}
-
+    {% for category in categories %}
       <div
         class="tab-pane fade"
-        id="pills-{{cat.id}}"
+        id="pills-{{ category.id }}"
         role="tabpanel"
-        aria-labelledby="pills-art-tab"
+        aria-labelledby="pills-{{ category.id }}-tab"
       >
         <!-- Items -->
         <div
           class="mx-n4 flickity-button-outset"
           data-flickity='{"pageDots": true, "prevNextButtons": true, "cellAlign": "left", "wrapAround": true, "imagesLoaded": true}'
         >
-          {% for i in course %} {% if i.category.id == cat.id %}
+        {% for course in courses %}
+          {% if course.category.id == category.id %}
           <div
             class="col-12 col-md-6 col-xl-4 col-wd-3 pb-4 pb-md-7"
             style="padding-right: 15px; padding-left: 15px"
@@ -378,7 +385,7 @@
                 >
                   <img
                     class="rounded shadow-light-lg"
-                    src="/{{i.featured_image}}"
+                    src="/{{course.featured_image}}"
                     alt="..."
                   />
                 </a>
@@ -387,7 +394,7 @@
                   class="badge sk-fade-bottom badge-lg badge-primary badge-pill badge-float bottom-0 left-0 mb-4 ms-4"
                 >
                   <span class="text-white text-uppercase fw-bold font-size-xs"
-                    >Discount {{i.discount}} %</span
+                    >Discount {{course.discount}} %</span
                   >
                 </span>
               </div>
@@ -399,7 +406,7 @@
                     class="avatar avatar-xl badge-float position-absolute top-0 right-0 mt-n6 me-5 rounded-circle shadow border border-white border-w-lg"
                   >
                     <img
-                      src="{{i.author.author_profile}}"
+                      src="{{course.author.author_profile}}"
                       alt="..."
                       class="avatar-img rounded-circle"
                     />
@@ -409,7 +416,7 @@
                 <!-- Preheading -->
                 <a href="course-single-v5.html"
                   ><span class="mb-1 d-inline-block text-gray-800"
-                    >{{i.category}}</span
+                    >{{course.category}}</span
                   ></a
                 >
 
@@ -422,7 +429,7 @@
                     <h4
                       class="line-clamp-2 h-md-48 h-lg-58 me-md-6 me-lg-10 me-xl-4 mb-2"
                     >
-                      {{i.title}}
+                      {{course.title}}
                     </h4>
                   </a>
 
@@ -486,18 +493,21 @@
                     </div>
 
                     <div class="col-auto px-2 text-right">
-                      <del class="font-size-sm">$959</del>
-                      <ins class="h4 mb-0 d-block mb-lg-n1">{{i.price}}</ins>
+                      <del class="font-size-sm">${{course.price}}</del>
+                      <ins class="h4 mb-0 d-block mb-lg-n1"
+                        >${% discount_calculation course.price course.discount %}</ins
+                      >
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {% else %} {% endif %} {% endfor %}
+          {% endif %} 
+        {% endfor %}
         </div>
       </div>
-      {% endfor %}
+    {% endfor %}
     </div>
   </div>
 </section>
@@ -510,7 +520,7 @@
       <div class="col-md mb-4 mb-md-0">
         <h1 class="mb-1">Trending Categories</h1>
         <p class="font-size-lg mb-0 text-capitalize">
-          Cum doctus civibus efficiantur in imperdiet deterruisset.
+          Educated minds achieve greatness even when faced with obstacles.
         </p>
       </div>
       <div class="col-md-auto">
@@ -539,7 +549,7 @@
     </div>
 
     <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 row-cols-wd-6">
-      {% for i in category %}
+      {% for category in categories %}
       <div class="col mb-md-6 mb-4 px-2 px-md-4">
         <!-- Card -->
         <a
@@ -548,11 +558,11 @@
         >
           <!-- Image -->
           <div class="mt-7 text-gigas display-4">
-            <i class="{{i.icon}}"></i>
+            <i class="{{category.icon}}"></i>
 
             <!-- Footer -->
             <div class="card-footer px-0 pb-0 pt-4">
-              <h5 class="mb-0 line-clamp-2 text-gigas">{{i.name}}</h5>
+              <h5 class="mb-0 line-clamp-2 text-gigas">{{category.name}}</h5>
             </div>
           </div>
         </a>
@@ -1937,3 +1947,4 @@
 </section>
 
 {% endblock %}
+

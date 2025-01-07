@@ -1,6 +1,6 @@
 from django.db import models
 
-class Categories(models.Model):
+class Category(models.Model):
     icon = models.CharField(max_length=200, null=True)
     name = models.CharField(max_length=200)
     
@@ -27,7 +27,7 @@ class Course(models.Model):
     title = models.CharField(max_length=500)
     created_at = models.DateField(auto_now_add=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField()
     price = models.IntegerField(null=True, default=0)
     discount = models.IntegerField(null=True)
