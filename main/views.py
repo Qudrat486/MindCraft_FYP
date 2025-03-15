@@ -30,11 +30,15 @@ def single_course(request):
     categories = Category.get_all_category(Category)
     level = Level.objects.all()
     course = Course.objects.all()
+    FreeCourse_count= Course.objects.filter(price=0).count()
+    PaidCourse_count= Course.objects.filter(price__gte=1).count()
     
     context = {
         'categories' : categories,
         'level' : level,
         'course' : course,
+        'FreeCourse_count': FreeCourse_count,
+        'PaidCourse_count': PaidCourse_count,
     }
     return render(request, 'main/single_course.html', context)
 
@@ -107,7 +111,6 @@ def logout_view(request):
     return redirect('home')  # Redirect to home after logging out
 
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
 def login_view(request):
@@ -158,3 +161,16 @@ def updated_profile(request):
         user.save()
         messages.success(request, "Profile Successfully Updated.")
         return redirect('update_profile')
+    
+    
+def search_course(request):
+    query = request.GET['query']
+    course = Course.objects.filter(title__icontains=query)
+    
+    context = {
+        'course': course,
+    }
+    return render(request, 'search/search.html',context) 
+
+def course_details(request, slug):
+    return render(request, 'course/course_details.html', {"slug": slug})

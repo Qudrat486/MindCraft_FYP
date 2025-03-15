@@ -14,7 +14,10 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('base', views.base, name='base'), 
     path('courses', views.single_course, name='single_course'),
-    path('product/filter-data', views.filter_data, name = 'filter-data'),
+    path('courses/filter-data', views.filter_data, name = 'filter-data'),
+    path('course/<slug:slug>', views.course_details, name='course_details'),
+    path('search', views.search_course, name='search_course'),
+    
     path('contact', views.contact_us, name='contact_us'),
     path('about', views.about_us, name='about_us'),
     

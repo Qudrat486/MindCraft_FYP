@@ -1,4 +1,12 @@
+{% load static %}
 {% load course_tags %}
+
+{% if course|length < 1 %}
+
+<img src="{% static 'assets/img/no_course.gif' %}" style="margin-left: 20%;">
+
+{% else %}
+
 {% for i in course %}
         <div class="col-md pb-4 pb-md-7">
           <!-- Card -->
@@ -173,3 +181,5 @@
           </div>
         </div>
 {% endfor %}
+
+{% endif %}
