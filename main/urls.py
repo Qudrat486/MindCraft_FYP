@@ -13,6 +13,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.home, name='home'),
     path('base', views.base, name='base'), 
+    path('404', views.page_not_found , name='404'),
     path('courses', views.single_course, name='single_course'),
     path('courses/filter-data', views.filter_data, name = 'filter-data'),
     path('course/<slug:slug>', views.course_details, name='course_details'),

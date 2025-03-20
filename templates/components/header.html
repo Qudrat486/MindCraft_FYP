@@ -48,26 +48,30 @@
           {% for category in categories %}
           <li class="dropdown-item dropright">
             <a
-              class="dropdown-link dropdown-toggle"
+              class="dropdown-link dropdown-toggle text-white"
               data-bs-toggle="dropdown"
               href="#"
             >
-              <div class="me-4 d-flex text-white icon-xs">
-                <!-- Icon -->
-                <i class="{{category.icon}}"></i>
+              <div class="me-4 d-flex icon-xs">
+                <!-- Category Icon -->
+                <i class="{{ category.icon }}"></i>
               </div>
-              {{category.name}}
+              {{ category.name }}
             </a>
 
+            <!-- Submenu for Courses -->
             <div
               class="dropdown-menu ps-3 top-0 pe-0 py-0 shadow-none bg-transparent"
             >
               <div
                 class="dropdown-menu-md bg-primary rounded dropdown-menu-inner"
               >
-                {% for i in category.course_set.all %}
-                <a class="dropdown-item" href="course-single-v1.html">
-                  {{i.title}}
+                {% for course in category.course_set.all %}
+                <a
+                  class="dropdown-item text-white"
+                  href="{% url 'course_details' course.slug %}"
+                >
+                  {{ course.title }}
                 </a>
                 {% endfor %}
               </div>

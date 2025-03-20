@@ -67,11 +67,19 @@ def filter_data(request):
     t=render_to_string('ajax/course.html',context)
     return JsonResponse({'data': t})
 
+
+
 def contact_us(request):
+    
     return render(request, 'main/contact_us.html')
 
+
+
 def about_us(request):
+    
     return render(request, 'main/about_us.html')
+
+
 
 def register(request):
     if request.method == "POST":
@@ -94,21 +102,27 @@ def register(request):
         )
         user.set_password(password)
         user.save()
-        return redirect('login')
-    
-        
+        return redirect('login')  
     return render(request, 'registration/register.html')
+
+
 
 def profile(request):
     return render(request, 'profile.html')  # Your profile page
+
+
 
 @login_required
 def enrolled_courses(request):
     return render(request, 'enrolled_courses.html')  # List of enrolled courses
 
+
+
 def logout_view(request):
     logout(request)
     return redirect('home')  # Redirect to home after logging out
+
+
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
@@ -139,6 +153,8 @@ def login_view(request):
 
 def update_profile(request):
     return render(request,'registration/update_profile.html')
+
+
 
 def updated_profile(request):
     if request.method == "POST":
@@ -172,5 +188,22 @@ def search_course(request):
     }
     return render(request, 'search/search.html',context) 
 
+
+
 def course_details(request, slug):
-    return render(request, 'course/course_details.html', {"slug": slug})
+    course = Course.objects.filter(slug=slug)
+    if course.exists():
+        course = course.first()
+    else:
+        return redirect('404')
+    
+    context= {
+        'course' : course,
+        
+    }
+    return render(request, 'course/course_details.html', context)
+
+
+
+def page_not_found(request):
+    return render(request, 'error/404.html')
