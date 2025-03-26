@@ -231,12 +231,12 @@
                     <div class="d-flex align-items-center mb-6">
                         <div class="d-inline-block rounded-circle border me-6 p-2">
                             <div class="avatar avatar-size-120">
-                                <img src="assets/img/avatars/avatar-2.jpg" alt="..." class="avatar-img rounded-circle">
+                                <img src="/{{course.author.author_profile}}" alt="..." class="avatar-img rounded-circle">
                             </div>
                         </div>
                         <div class="media-body">
-                            <h4 class="mb-0">Lauren Handerson</h4>
-                            <span>iOS Developer & UI Designer</span>
+                            <h4 class="mb-0">{{course.author.name}}</h4>
+                            <span>Web Developer</span>
                         </div>
                     </div>
 
@@ -293,8 +293,8 @@
                         </div>
                     </div>
 
-                    <p class="mb-6 line-height-md">I am a UI/UX designer and an iOS developer with having almost six years of experience in application development and also ten years of graphic design and User Interface design.</p>
-                    <p class="mb-6 line-height-md">My passion is helping people to learn new skills in a short-term course and achieve their goals. I've been designing for more than ten years and developing iOS apps for four years. It's my honor if I could help you learn to program in a simple word. I currently am teaching iOS 13, Swift 5, ARKit 3, Sketch 5, Illustrator, Photoshop, Cinema 4D, HTML, CSS, JavaScript, etc.</p>
+                    <p class="mb-6 line-height-md">{{course.author.about_author}}</p>
+                    <
                 </div>
 
                 <div id="Reviews" class="mb-8">
@@ -486,7 +486,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 ">
                 <!-- SIDEBAR FILTER
                 ================================================== -->
                 <div class="d-block rounded border p-2 shadow mb-6">
@@ -526,7 +526,7 @@
                         <button class="btn btn-orange btn-block mb-6" type="button" name="button">ENROLL</button>
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item d-flex align-items-center py-3">
+                            <li class="list-group-item d-flex align-items-center py-3" style = "background-color: #F7F9FB;">
                                 <div class="text-secondary d-flex icon-uxs">
                                     <!-- Icon -->
                                     <svg width="16" height="16" viewBox="0 0 16 16" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">
@@ -536,9 +536,9 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Duration</h6>
-                                <span>43 weeks</span>
+                                <span>{{time_duration.sum}} weeks</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center py-3">
+                            <li class="list-group-item d-flex align-items-center py-3"style = "background-color: #F7F9FB;">
                                 <div class="text-secondary d-flex icon-uxs">
                                     <!-- Icon -->
                                     <svg width="16" height="16" viewBox="0 0 16 16" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">
@@ -547,9 +547,9 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Lectures</h6>
-                                <span>32</span>
+                                <span>{{course.video_set.all.count}}</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center py-3">
+                            <li class="list-group-item d-flex align-items-center py-3" style = "background-color: #F7F9FB;">
                                 <div class="text-secondary d-flex icon-uxs">
                                     <!-- Icon -->
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">
@@ -560,7 +560,7 @@
                                 <h6 class="mb-0 ms-3 me-auto">Enrolled</h6>
                                 <span>1982 students</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center py-3">
+                            <li class="list-group-item d-flex align-items-center py-3" style = "background-color: #F7F9FB;">
                                 <div class="text-secondary d-flex icon-uxs">
                                     <!-- Icon -->
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">
@@ -571,9 +571,9 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Language</h6>
-                                <span>English</span>
+                                <span>{{course.language}}</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center py-3">
+                            <li class="list-group-item d-flex align-items-center py-3" style = "background-color: #F7F9FB;">
                                 <div class="text-secondary d-flex icon-uxs">
                                     <!-- Icon -->
                                     <svg width="16" height="16" viewBox="0 0 16 16" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">
@@ -584,9 +584,9 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Skill level</h6>
-                                <span>beginner</span>
+                                <span>{{course.level.name}}</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center py-3">
+                            <li class="list-group-item d-flex align-items-center py-3" style = "background-color: #F7F9FB;">
                                 <div class="text-secondary d-flex icon-uxs">
                                     <!-- Icon -->
                                     <svg width="16" height="16" viewBox="0 0 16 16" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">
@@ -601,9 +601,9 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Deadline</h6>
-                                <span>06 April 2020</span>
+                                <span>{{course.Deadline}}</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center py-3">
+                            <li class="list-group-item d-flex align-items-center py-3" style = "background-color: #F7F9FB;">
                                 <div class="text-secondary d-flex icon-uxs">
                                     <!-- Icon -->
                                     <svg width="20" height="20" viewBox="0 0 20 20" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">
@@ -613,9 +613,9 @@
 
                                 </div>
                                 <h6 class="mb-0 ms-3 me-auto">Certificate</h6>
-                                <span>Yes</span>
+                                <span>{{course.Certificate}}</span>
                             </li>
-                            <li class="list-group-item d-flex align-items-center py-4">
+                            <li class="list-group-item d-flex align-items-center py-4" style = "background-color: #F7F9FB;">
                                 <a href="course-single-v5.html" class="mx-auto text-teal fw-medium d-flex align-items-center mt-2">
                                     <!-- Icon -->
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="../../../external.html?link=http://www.w3.org/2000/svg">

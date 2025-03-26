@@ -4,9 +4,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from main.models import Category, Course, Level
+from main.models import Category, Course, Level, Video
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.db.models import Sum
 
 
 
@@ -191,7 +192,10 @@ def search_course(request):
 
 
 def course_details(request, slug):
+    time_duration = Video.objects.filter(course__slug=slug).aggregate(sum=Sum('time_duration'))
+    
     course = Course.objects.filter(slug=slug)
+    
     if course.exists():
         course = course.first()
     else:
@@ -199,6 +203,7 @@ def course_details(request, slug):
     
     context= {
         'course' : course,
+        'time_duration' : time_duration,
         
     }
     return render(request, 'course/course_details.html', context)
