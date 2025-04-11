@@ -4,10 +4,11 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from main.models import Category, Course, Level, Video
+from main.models import Category, Course, Level, Video, UserCourse
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.db.models import Sum
+from django.shortcuts import get_object_or_404
 
 
 
@@ -194,6 +195,12 @@ def search_course(request):
 def course_details(request, slug):
     time_duration = Video.objects.filter(course__slug=slug).aggregate(sum=Sum('time_duration'))
     
+    course_id = Course.objects.get(slug=slug).id
+    try:
+        check_enrolled = UserCourse.objects.get(user=request.user, course__id=course_id)
+    except UserCourse.DoesNotExist:
+        check_enrolled = None
+    
     course = Course.objects.filter(slug=slug)
     
     if course.exists():
@@ -204,6 +211,7 @@ def course_details(request, slug):
     context= {
         'course' : course,
         'time_duration' : time_duration,
+        'check_enrolled' : check_enrolled,
         
     }
     return render(request, 'course/course_details.html', context)
@@ -212,3 +220,14 @@ def course_details(request, slug):
 
 def page_not_found(request):
     return render(request, 'error/404.html')
+
+def checkout(request, slug):
+    course = get_object_or_404(Course, slug=slug)
+    if course.price == 0:
+        course = UserCourse(
+            user = request.user,
+            course = course,
+        )
+        course.save()
+        return redirect('home')
+    return render(request, 'checkout/checkout.html')
