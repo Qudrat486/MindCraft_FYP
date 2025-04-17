@@ -34,5 +34,6 @@ urlpatterns = [
     path('accounts/update_profile',views.update_profile, name='update_profile'), #profile
     path('accounts/update_profile/updated_profile',views.updated_profile, name='updated_profile'),   #update_profile
     path('checkout/<slug:slug>', views.checkout, name = 'checkout'),
+    path('my_courses', views.my_courses, name = 'my_courses'),
     
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
