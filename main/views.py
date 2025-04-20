@@ -4,11 +4,22 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from main.models import Category, Course, Level, Video, UserCourse
+from main.models import Category, Course, Level, Video, UserCourse, Order
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+import json
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404
+from time import time
+from razorpay import Client
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+
+
+import razorpay
+KEY_ID = settings.RAZORPAY_API_KEY
+KEY_SECRET = settings.RAZORPAY_API_SECRET
+Client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
 
 
 
@@ -231,7 +242,11 @@ def checkout(request, slug):
         course.save()
         messages.success(request, "You have successfully enrolled in the course.")
         return redirect('my_courses')
-    return render(request, 'checkout/checkout.html')
+    
+    context = {
+        'course' : course,
+    }
+    return render(request, 'checkout/checkout.html', context )
 
 def my_courses(request):
     courses = UserCourse.objects.filter(user=request.user)    
@@ -239,3 +254,25 @@ def my_courses(request):
         'courses': courses,
     }
     return render(request, 'course/my-course.html', context)
+
+
+def verify_payment(request):
+    return render(request, 'checkout/payment_success.html')
+
+def cancel_payment(request):
+    return render(request, 'checkout/payment_cancel.html')
+
+@csrf_exempt
+def save_order(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        order = Order.objects.create(
+            user=request.user,
+            course_title=data['courseTitle'],
+            amount=data['amount'],
+            paypal_order_id=data['orderID'],
+            payer_email=data['payerEmail'],
+            payment_status=data['status']
+        )
+        return JsonResponse({'message': 'Order saved!'}, status=200)      
+

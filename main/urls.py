@@ -35,5 +35,7 @@ urlpatterns = [
     path('accounts/update_profile/updated_profile',views.updated_profile, name='updated_profile'),   #update_profile
     path('checkout/<slug:slug>', views.checkout, name = 'checkout'),
     path('my_courses', views.my_courses, name = 'my_courses'),
-    
+    path('verify_payment', views.verify_payment, name='verify_payment'),
+    path('payment-cancel/', views.cancel_payment, name='payment_cancel'),
+    path('save-order/', views.save_order, name='save_order'), 
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
