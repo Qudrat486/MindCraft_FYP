@@ -60,13 +60,18 @@
 
 
     {% include 'components/modals.html' %}
+{% block header %}
+{% include 'components/header.html' %}
+{% endblock header %}
 
-    {% include 'components/header.html' %}
     {% block content %}
       
     {% endblock %}
 
+    {% block footer %}
     {% include 'components/footer.html' %}
+    {% endblock footer %}
+
 
 
        

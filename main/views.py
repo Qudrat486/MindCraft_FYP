@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from main.models import Category, Course, Level, Video, UserCourse, Order
 from django.template.loader import render_to_string
@@ -10,19 +9,7 @@ from django.http import JsonResponse
 import json
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404
-from time import time
-from razorpay import Client
-from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-
-
-import razorpay
-KEY_ID = settings.RAZORPAY_API_KEY
-KEY_SECRET = settings.RAZORPAY_API_SECRET
-Client = razorpay.Client(auth=(KEY_ID, KEY_SECRET))
-
-
-
 
 def base(request):
     return render(request, 'base.html')
@@ -137,8 +124,6 @@ def logout_view(request):
 
 
 
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 
 def login_view(request):
     if request.user.is_authenticated:
