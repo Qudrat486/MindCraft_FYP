@@ -44,7 +44,7 @@
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yourusername/MindCraft_FYP.git
+   git clone https://github.com/qudrat486/MindCraft_FYP.git
    cd MindCraft_FYP
 ````
 
@@ -64,6 +64,7 @@
 4. **Apply Migrations**
 
    ```bash
+   python manage.py makemigrations
    python manage.py migrate
    ```
 
